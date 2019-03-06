@@ -1,0 +1,1 @@
+bash -c 'for i in {1..255..1}; do ping 192.168.1.$i -c 1 -i 0.2; done | grep "ttl="'
